@@ -1,9 +1,10 @@
-FROM openjdk:17
-VOLUME /tmp
+# Build stage
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY pom.xml /app/
+COPY src /app/src
+RUN mvn -f /app/pom.xml clean package
 
-# Execute o processo de construção do Spring Boot (substitua pelo comando real de construção)
-RUN mvn clean package
-
-COPY target/*.jar app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Run stage
+FROM openjdk:8-jdk-alpine # Use your target JDK here !
+COPY --from=build /app/target/app*.jar /app/app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/app.jar"]
