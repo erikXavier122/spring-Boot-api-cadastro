@@ -25,7 +25,7 @@ public interface CadastroRepository extends JpaRepository<CadastroModel, UUID> {
     Optional<CadastroModel> findByCpf(String cpf);
 
     @Modifying
-    @Query(value = "UPDATE tb_cadastro SET name = ?1, address = ?2, date = ?3, email = ?4, cpf = ?5, sex = ?6, telephone = ?7 WHERE cpf ?1" ,nativeQuery = true)
+    @Query(value = "UPDATE tb_cadastro SET name = ?1, address = ?2, date = ?3, email = ?4, cpf = ?5, sex = ?6, telephone = ?7 WHERE cpf ?5" ,nativeQuery = true)
     void updateBycpf(String name, String address, String date, String email, String cpf, String sex, Integer telephone);
 
 }

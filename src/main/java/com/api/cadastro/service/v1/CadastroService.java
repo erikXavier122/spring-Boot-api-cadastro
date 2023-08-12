@@ -4,12 +4,13 @@ package com.api.cadastro.service.v1;
 import com.api.cadastro.domain.model.v1.CadastroModel;
 import com.api.cadastro.dto.CadastroDto;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface CadastroService {
 
 
-    List<CadastroModel> findAll();
+    Collection<CadastroModel> findAll();
 
     Object findByEmail(String email);
 
