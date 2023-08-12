@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Execute o processo de construção do Spring Boot (substitua pelo comando real de construção)
-RUN ./mvnw clean package
+RUN mvnw clean package
 
 # Agora crie uma imagem mais leve para a execução
 FROM openjdk:16-jdk-slim
