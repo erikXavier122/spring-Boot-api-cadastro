@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class CadastroServiceImpl implements CadastroService{
     }
 
     @Override
-    public List<CadastroModel> findAll() {
+    public Collection<CadastroModel> findAll() {
         return cadastroRepository.findAll();
     }
 
@@ -83,7 +84,7 @@ public class CadastroServiceImpl implements CadastroService{
     public Object deleteByEmail(String email) {
         Optional<CadastroModel> cadastroModelOptional = findByEmail(email);
         System.out.println(cadastroModelOptional);
-        if (!cadastroModelOptional.isPresent()){
+        if (cadastroModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email nao existe.");
         }
         delete(cadastroModelOptional.get());
@@ -95,7 +96,7 @@ public class CadastroServiceImpl implements CadastroService{
     public Object deleteByCpf(String cpf) {
         Optional<CadastroModel>cadastroModelOptional=findByCpf(cpf);
         System.out.println(cadastroModelOptional);
-        if (!cadastroModelOptional.isPresent()){
+        if (cadastroModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cpf nao existe.");
         }
         delete(cadastroModelOptional.get());
@@ -107,7 +108,7 @@ public class CadastroServiceImpl implements CadastroService{
     public Object deleteByTelephone(Integer telephone) {
         Optional<CadastroModel> cadastroModelOptional = findByTelephone(telephone);
         System.out.println(cadastroModelOptional);
-        if (!cadastroModelOptional.isPresent()){
+        if (cadastroModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Telefone nao existe");
         }
         delete(cadastroModelOptional.get());

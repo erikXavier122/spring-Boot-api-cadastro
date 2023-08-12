@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,14 +49,14 @@ public class CadastroControler {
             @ApiResponse(responseCode = "200",description = "Puxou todos os cadastros"),
     })
     @GetMapping("/getAll")
-    public ResponseEntity<List<CadastroModel>> getAll(){
+    public ResponseEntity<Collection<CadastroModel>> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(cadastroService.findAll());
     }
 
     @Operation(summary = "Puxar um cadastro por email expecifico",method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "cadastro encontrado com sucesso."),
-            @ApiResponse(responseCode = "200",description = "cadastro nao existe!"),
+            @ApiResponse(responseCode = "404",description = "cadastro nao existe!"),
     })
     @GetMapping("/getbyEmail/{email}")
     public ResponseEntity<Object> getByEmail(@PathVariable(value = "email")String email){
