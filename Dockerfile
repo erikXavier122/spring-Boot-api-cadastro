@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17
 VOLUME /tmp
 
 # Execute o processo de construção do Spring Boot (substitua pelo comando real de construção)
