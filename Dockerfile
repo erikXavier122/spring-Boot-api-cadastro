@@ -1,18 +1,23 @@
-FROM openjdk:17-jdk-buster
+# Use uma imagem do OpenJDK como base para construir o projeto
+FROM openjdk:16-jdk as build
 
-RUN apt update && apt install -y maven
+# Diretório de trabalho dentro do contêiner
+WORKDIR /app
 
-COPY pom.xml pom.xml
-RUN mvn dependency:go-offline
+# Copie os arquivos de origem para o contêiner
 COPY . .
-RUN mvn clean package -DskipTests=true
 
-FROM openjdk:17-jdk-buster
-RUN apt update && apt install -y locales
-ENV TZ=America/Sao_Paulo
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# Execute o processo de construção do Spring Boot (substitua pelo comando real de construção)
+RUN ./mvnw clean package
 
-COPY --from=0 /target/*.jar  /app.jar
+# Agora crie uma imagem mais leve para a execução
+FROM openjdk:16-jdk-slim
 
-EXPOSE 8080
-CMD ["java", "-jar", "/app.jar"]
+# Diretório de trabalho dentro do contêiner de execução
+WORKDIR /app
+
+# Copie o arquivo JAR gerado durante a fase de construção para o contêiner de execução
+COPY --from=build /app/target/seu-projeto-spring-boot.jar /app/app.jar
+
+# Comando para executar o aplicativo Spring Boot
+CMD ["java", "-jar", "app.jar"]
