@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD["openjdk" , "server.js"]
+CMD ["openjdk" , "server.js"]
