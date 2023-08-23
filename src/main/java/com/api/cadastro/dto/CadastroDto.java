@@ -1,11 +1,6 @@
 package com.api.cadastro.dto;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class CadastroDto {
 

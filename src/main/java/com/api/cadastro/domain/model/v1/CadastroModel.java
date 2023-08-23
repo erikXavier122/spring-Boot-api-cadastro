@@ -1,11 +1,10 @@
 package com.api.cadastro.domain.model.v1;
 
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 
