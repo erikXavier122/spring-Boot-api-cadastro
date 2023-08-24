@@ -18,11 +18,11 @@ jobs:
           password: ${{ secrets.PASSWORD }}
         
       - name: Construção da imagem Docker
-        uses: docker/build-push-action@v4.1.1
+        uses: docker/build-push-action@v3.3.1
         with:
           context: ./
           file: ./Dockerfile
           push: true
           tags: |
-            erikxavier122/api-cadastro:v1
-            erikxavier122/api-cadastro:latest
+            erikxavier122/spring-boot-api-cadastro:v1
+            erikxavier122/spring-boot-api-cadastro:latest
