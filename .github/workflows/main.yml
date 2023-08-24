@@ -17,5 +17,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            erikXavier122/api-cadastro:v1
-            erikXavier122/api-cadastro:latest
+            erikxavier122/api-cadastro:v1
+            erikxavier122/api-cadastro:latest
