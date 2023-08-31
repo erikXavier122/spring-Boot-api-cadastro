@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-buster
+FROM openjdk:8-jdk-buster as build
 
 RUN apt update && apt upgrade -y && apt install -y maven && \
     apt remove --auto-remove python -y && apt-get purge python -y && \
@@ -17,8 +17,8 @@ RUN apt update && apt upgrade -y && apt install -y locales && \
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY --from=0 /target/*.jar  /app.jar
-
+COPY --from=build /target/*.jar  /app.jar
+RUN ls -lha
 EXPOSE 8080
 
 CMD ["java", "-jar", "/app.jar"]

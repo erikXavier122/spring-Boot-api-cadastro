@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title ="cadastro OpenApi",version = "1",description = "Api desenvolvida para testes OpenApi"))
 public class CadastroApplication {
 
 	public static void main(String[] args) {

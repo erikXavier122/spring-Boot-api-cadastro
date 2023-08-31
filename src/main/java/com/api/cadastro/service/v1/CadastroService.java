@@ -3,6 +3,7 @@ package com.api.cadastro.service.v1;
 
 import com.api.cadastro.domain.model.v1.CadastroModel;
 import com.api.cadastro.dto.CadastroDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -10,28 +11,27 @@ import java.util.List;
 public interface CadastroService {
 
 
-    Collection<CadastroModel> findAll();
+    ResponseEntity<?> save(CadastroModel cadastroModel);
 
-    Object findByEmail(String email);
+    ResponseEntity<?> findAll();
 
-    Object findByTelephone(Integer telephone);
+    ResponseEntity<?> findByEmail(String email);
 
-    Object save(CadastroModel cadastroModel);
+    ResponseEntity<?> findByTelephone(Integer telephone);
 
-    Object findByCpf(String cpf);
+    ResponseEntity<?> findByCpf(String cpf);
 
-    Object updateByCpf(String cpf, CadastroDto cadastroDto);
+    ResponseEntity<?> updateByCpf(String cpf, CadastroDto cadastroDto);
 
 
-    Object updateByEmail(String email, CadastroDto cadastroDto);
+    ResponseEntity<?> updateByEmail(String email, CadastroDto cadastroDto);
 
-    Object updateByTelephone(Integer telephone, CadastroDto cadastroDto);
+    ResponseEntity<?> updateByTelephone(Integer telephone, CadastroDto cadastroDto);
 
-    Object deleteByEmail(String email);
+    ResponseEntity<?> deleteByEmail(String email);
 
-    Object deleteByCpf(String cpf);
-
-    Object deleteByTelephone(Integer telephone);
+    ResponseEntity<?> deleteByCpf(String cpf);
 
      void delete(CadastroModel cadastroModel);
+
 }

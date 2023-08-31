@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="property.servico.nome">spring_boot-api-cadastro</Property>
+        <Property name="property.servico.instancia">$${env:HOSTNAME:-}</Property>
+    </Properties>
+    <Appenders>
+        <Console name="JsonOutput" target="SYSTEM_OUT">
+            <JsonLayout complete="false" includeStacktrace="false" compact="true" properties="false" eventEol="true">
+                <KeyValuePair key="servico.nome" value="${property.servico.nome}" />
+                <KeyValuePair key="endpoint" value="$${ctx:endpoint}"/>
+                <KeyValuePair key="status" value="$${ctx:status}"/>
+                <KeyValuePair key="message" value="$${ctx:message}"/>
+                <keyValuePair key="datetime.ini" value="$${ctx:datetime.ini:-}"/>
+                <keyValuePair key="datetime.fin" value="$${ctx:datetime.fin:-}"/>
+            </JsonLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="WARN">
+            <AppenderRef ref="JsonOutput" level="ANALYTICS" />
+            <AppenderRef ref="JsonOutput" level="WARN" />
+            <AppenderRef ref="JsonOutput" level="ERROR" />
+        </Root>
+    </Loggers>
+</Configuration>

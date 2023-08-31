@@ -35,10 +35,10 @@ public class CadastroControler {
             @ApiResponse(responseCode = "500", description = "Erro ao realizar o upload de arquivo"),
     })
     @PostMapping("/save")
-    public ResponseEntity<Object> saveCadastros(@RequestBody @Valid CadastroDto cadastroDto){
+    public ResponseEntity<?> saveCadastros(@RequestBody @Valid CadastroDto cadastroDto){
         CadastroModel cadastroModel=new CadastroModel();
         BeanUtils.copyProperties(cadastroDto,cadastroModel);
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.save(cadastroModel));
+        return cadastroService.save(cadastroModel);
     }
 
     @Operation(summary = "Puxa todos os cadastros",method = "GET")
@@ -46,8 +46,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "200",description = "Puxou todos os cadastros"),
     })
     @GetMapping("/getAll")
-    public ResponseEntity<Collection<CadastroModel>> getAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.findAll());
+    public ResponseEntity<?> getAll(){
+        return cadastroService.findAll();
     }
 
     @Operation(summary = "Puxar um cadastro por email expecifico",method = "GET")
@@ -55,9 +55,9 @@ public class CadastroControler {
             @ApiResponse(responseCode = "200",description = "cadastro encontrado com sucesso."),
             @ApiResponse(responseCode = "404",description = "cadastro nao existe!"),
     })
-    @GetMapping("/getbyEmail/{email}")
-    public ResponseEntity<Object> getByEmail(@PathVariable(value = "email")String email){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.findByEmail(email));
+    @GetMapping("/getByEmail/{email}")
+    public ResponseEntity<?> getByEmail(@PathVariable(value = "email")String email){
+        return cadastroService.findByEmail(email);
     }
 
 
@@ -66,9 +66,9 @@ public class CadastroControler {
             @ApiResponse(responseCode = "200",description = "cadastro encontrado com sucesso."),
             @ApiResponse(responseCode = "404",description = "cadastro nao existe!")
     })
-    @GetMapping("/getbyTelephone/{telephone}")
-    public ResponseEntity<Object> getByTelephone(@PathVariable(value = "telephone")Integer telephone){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.findByTelephone(telephone));
+    @GetMapping("/getByTelephone/{telephone}")
+    public ResponseEntity<?> getByTelephone(@PathVariable(value = "telephone")Integer telephone){
+        return cadastroService.findByTelephone(telephone);
     }
 
     @Operation(summary = "Puxar cadastro pelo cpf",method = "GET")
@@ -77,8 +77,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "Cadastro nao existe"),
     })
     @GetMapping("/getByCpf/{cpf}")
-    public ResponseEntity<Object> getByCpf(@PathVariable(value = "cpf")String cpf){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.findByCpf(cpf));
+    public ResponseEntity<?> getByCpf(@PathVariable(value = "cpf")String cpf){
+        return cadastroService.findByCpf(cpf);
     }
 
     @Operation(summary = "Atualizar cadastro pelo email",method = "PUT")
@@ -87,8 +87,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404", description = "Cadastro nao existe"),
     })
     @PutMapping("/updateByEmail/{email}")
-    public ResponseEntity<Object> updateByEmail(@PathVariable (value = "email") String email,@RequestBody @Valid CadastroDto cadastroDto){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.updateByEmail(email,cadastroDto));
+    public ResponseEntity<?> updateByEmail(@PathVariable (value = "email") String email,@RequestBody @Valid CadastroDto cadastroDto){
+        return cadastroService.updateByEmail(email,cadastroDto);
     }
 
     @Operation(summary = "Atualizar cadastros pelo cpf",method = "PUT")
@@ -97,8 +97,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404", description = "Cadastro nao existe"),
     })
     @PutMapping("/updateByCpf/{cpf}")
-    public ResponseEntity<Object> updateByCpf(@PathVariable(value = "cpf")String cpf,@RequestBody @Valid CadastroDto cadastroDto){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.updateByCpf(cpf,cadastroDto));
+    public ResponseEntity<?> updateByCpf(@PathVariable(value = "cpf")String cpf,@RequestBody @Valid CadastroDto cadastroDto){
+        return cadastroService.updateByCpf(cpf,cadastroDto);
     }
 
     @Operation(summary = "Atualizar cadastro pelo telefone",method = "PUT")
@@ -107,8 +107,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404", description = "Cadastro nao existe"),
     })
     @PutMapping("/updateByTelephone/{telephone}")
-    public ResponseEntity<Object> updateByTelephone(@PathVariable (value = "telephone") Integer telephone,@RequestBody @Valid CadastroDto cadastroDto){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.updateByTelephone(telephone,cadastroDto));
+    public ResponseEntity<?> updateByTelephone(@PathVariable (value = "telephone") Integer telephone,@RequestBody @Valid CadastroDto cadastroDto){
+        return cadastroService.updateByTelephone(telephone,cadastroDto);
     }
 
     @Operation(summary = "Deleta cadastro por email",method = "DELETE")
@@ -117,19 +117,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "Email nao encontrado"),
     })
     @DeleteMapping("/deleteByEmail/{email}")
-    public ResponseEntity<Object> deleteByEmail(@PathVariable(value = "email")String email){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.deleteByEmail(email));
-    }
-
-
-    @Operation(summary = "Deleta cadastro por telefone",method = "DELETE")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Cadastro apagado com sucesso"),
-            @ApiResponse(responseCode = "404",description = "Telefone nao encontrado"),
-    })
-    @DeleteMapping("/deleteByTelephone/{telephone}")
-    public ResponseEntity<Object> deleteByTelephone(@PathVariable(value = "telephone")Integer telephone){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.deleteByTelephone(telephone));
+    public ResponseEntity<?> deleteByEmail(@PathVariable(value = "email")String email){
+        return cadastroService.deleteByEmail(email);
     }
 
     @Operation(summary = "Deleta cadastro por Cpf",method = "DELETE")
@@ -138,8 +127,8 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "Cpf nao encontrado"),
     })
     @DeleteMapping("/deleteByCpf/{cpf}")
-    public ResponseEntity<Object> deleteByCpf(@PathVariable(value = "cpf")String cpf){
-        return ResponseEntity.status(HttpStatus.OK).body(cadastroService.deleteByCpf(cpf));
+    public ResponseEntity<?> deleteByCpf(@PathVariable(value = "cpf")String cpf){
+        return cadastroService.deleteByCpf(cpf);
     }
 
 

@@ -3,6 +3,9 @@ package com.api.cadastro.domain.model.v1;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
@@ -13,6 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_cadastro")
+
 public class CadastroModel implements Serializable {
 
 
@@ -28,7 +32,7 @@ public class CadastroModel implements Serializable {
     @Column(unique = true,nullable = false,length = 70)
     private String email;
 
-    @Column(nullable = false,unique = true,length = 13)
+    @Column(nullable = false,unique = true,length = 20)
     private Integer telephone;
 
     @Column(nullable = false,length = 100)
@@ -43,6 +47,19 @@ public class CadastroModel implements Serializable {
     @Column(nullable = false,unique = true,length = 11)
     private String cpf;
 
+    public CadastroModel() {
+    }
+
+    public CadastroModel(UUID id, String name, String email, Integer telephone, String address, String date, String sex, String cpf) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.telephone = telephone;
+        this.address = address;
+        this.date = date;
+        this.sex = sex;
+        this.cpf = cpf;
+    }
 
     public UUID getId() {
         return id;

@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mysql-db:
+    container_name: mysql-db
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysql_cadastro
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-cloud-network
+  api-cadastro-usuario:
+    container_name: api-cadastro-usuario
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api-cadastro-usuario:latest
+    environment:
+      MYSQL_DATABASE: mysql_cadastro
+      MYSQL_URL: mysql-db
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
