@@ -14,15 +14,27 @@ public class LoggerConfig {
         // Default constructor.
     }
 
-    public static void setAnalyticsLog(String endpoint,String statusCode,String message,String initialTime, String finalTime) {
+    public static void setAnalyticsLog(String endpoint,Integer statusCode,String message,String initialTime, String finalTime) {
         ThreadContext.clearMap();
         ThreadContext.put("endpoint",endpoint);
-        ThreadContext.put("status",statusCode);
+        ThreadContext.put("status", String.valueOf(statusCode));
         ThreadContext.put("message",message);
         ThreadContext.put("datetime.ini", initialTime);
         ThreadContext.put("datetime.fin", finalTime);
 
-        logger.log(Level.forName("ANALYTICS", 200), "Registro inserido.");
+        logger.log(Level.forName("ANALYTICS", statusCode), message);
+        ThreadContext.clearMap();
+    }
+
+    public static void setErrorLog(String endpoint,Integer statusCode,String message,String initialTime, String finalTime) {
+        ThreadContext.clearMap();
+        ThreadContext.put("endpoint",endpoint);
+        ThreadContext.put("status", String.valueOf(statusCode));
+        ThreadContext.put("message",message);
+        ThreadContext.put("datetime.ini",initialTime);
+        ThreadContext.put("datetime.fin",finalTime);
+
+        logger.log(Level.forName("ERROR",statusCode),message);
         ThreadContext.clearMap();
     }
 

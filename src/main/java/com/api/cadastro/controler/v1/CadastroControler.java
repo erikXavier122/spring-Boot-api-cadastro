@@ -60,7 +60,6 @@ public class CadastroControler {
         return cadastroService.findByEmail(email);
     }
 
-
     @Operation(summary = "Puxar cadastro pelo telefone",method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "cadastro encontrado com sucesso."),

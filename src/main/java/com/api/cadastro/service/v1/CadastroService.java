@@ -33,5 +33,6 @@ public interface CadastroService {
     ResponseEntity<?> deleteByCpf(String cpf);
 
      void delete(CadastroModel cadastroModel);
+     Boolean validadeValueByString(String valueValidation);
 
 }
