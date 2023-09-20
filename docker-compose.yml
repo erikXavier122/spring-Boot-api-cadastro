@@ -1,5 +1,20 @@
-version: '2'
+version: '3'
 services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOST=local:redis:6379
+    ports:
+      - "8081:8081"
+    networks:
+      - spring-cloud-network
   mysql-db:
     container_name: mysql-db
     image: mysql
@@ -25,7 +40,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - spring-cloud-networketwork
+      - spring-cloud-network
 networks:
   spring-cloud-network:
     driver: bridge

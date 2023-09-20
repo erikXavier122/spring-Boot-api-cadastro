@@ -5,6 +5,7 @@ import com.api.cadastro.domain.model.v1.CadastroModel;
 import com.api.cadastro.dto.CadastroDto;
 import org.springframework.http.ResponseEntity;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,22 +18,21 @@ public interface CadastroService {
 
     ResponseEntity<?> findByEmail(String email);
 
-    ResponseEntity<?> findByTelephone(Integer telephone);
+    ResponseEntity<?> findByTelephone(Long telephone);
 
-    ResponseEntity<?> findByCpf(String cpf);
+    ResponseEntity<?> findByCpf(Long cpf);
 
-    ResponseEntity<?> updateByCpf(String cpf, CadastroDto cadastroDto);
-
+    @Transactional
+    ResponseEntity<?> updateByCpf(Long cpf, CadastroDto cadastroDto);
 
     ResponseEntity<?> updateByEmail(String email, CadastroDto cadastroDto);
 
-    ResponseEntity<?> updateByTelephone(Integer telephone, CadastroDto cadastroDto);
+    ResponseEntity<?> updateByTelephone(Long telephone, CadastroDto cadastroDto);
 
     ResponseEntity<?> deleteByEmail(String email);
 
-    ResponseEntity<?> deleteByCpf(String cpf);
+    ResponseEntity<?> deleteByCpf(Long cpf);
 
      void delete(CadastroModel cadastroModel);
-     Boolean validadeValueByString(String valueValidation);
 
 }
