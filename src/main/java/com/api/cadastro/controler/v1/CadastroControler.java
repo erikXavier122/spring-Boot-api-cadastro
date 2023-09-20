@@ -8,12 +8,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.HttpStatus;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.Cacheable;
 
 import javax.validation.Valid;
-import java.util.Collection;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -66,7 +68,7 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "cadastro nao existe!")
     })
     @GetMapping("/getByTelephone/{telephone}")
-    public ResponseEntity<?> getByTelephone(@PathVariable(value = "telephone")Integer telephone){
+    public ResponseEntity<?> getByTelephone(@PathVariable(value = "telephone")Long telephone){
         return cadastroService.findByTelephone(telephone);
     }
 
@@ -76,7 +78,7 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "Cadastro nao existe"),
     })
     @GetMapping("/getByCpf/{cpf}")
-    public ResponseEntity<?> getByCpf(@PathVariable(value = "cpf")String cpf){
+    public ResponseEntity<?> getByCpf(@PathVariable(value = "cpf")Long cpf){
         return cadastroService.findByCpf(cpf);
     }
 
@@ -96,7 +98,7 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404", description = "Cadastro nao existe"),
     })
     @PutMapping("/updateByCpf/{cpf}")
-    public ResponseEntity<?> updateByCpf(@PathVariable(value = "cpf")String cpf,@RequestBody @Valid CadastroDto cadastroDto){
+    public ResponseEntity<?> updateByCpf(@PathVariable(value = "cpf")Long cpf,@RequestBody @Valid CadastroDto cadastroDto){
         return cadastroService.updateByCpf(cpf,cadastroDto);
     }
 
@@ -106,7 +108,7 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404", description = "Cadastro nao existe"),
     })
     @PutMapping("/updateByTelephone/{telephone}")
-    public ResponseEntity<?> updateByTelephone(@PathVariable (value = "telephone") Integer telephone,@RequestBody @Valid CadastroDto cadastroDto){
+    public ResponseEntity<?> updateByTelephone(@PathVariable (value = "telephone") Long telephone,@RequestBody @Valid CadastroDto cadastroDto){
         return cadastroService.updateByTelephone(telephone,cadastroDto);
     }
 
@@ -126,7 +128,7 @@ public class CadastroControler {
             @ApiResponse(responseCode = "404",description = "Cpf nao encontrado"),
     })
     @DeleteMapping("/deleteByCpf/{cpf}")
-    public ResponseEntity<?> deleteByCpf(@PathVariable(value = "cpf")String cpf){
+    public ResponseEntity<?> deleteByCpf(@PathVariable(value = "cpf")Long cpf){
         return cadastroService.deleteByCpf(cpf);
     }
 

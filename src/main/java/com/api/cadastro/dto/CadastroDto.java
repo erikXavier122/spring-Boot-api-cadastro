@@ -1,23 +1,34 @@
 package com.api.cadastro.dto;
 
 
+import com.api.cadastro.domain.model.v1.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class CadastroDto {
+import javax.persistence.Column;
+import java.time.LocalDate;
 
+public class CadastroDto extends BaseEntity {
 
+    @Column(length = 70,nullable = false)
     private String name;
 
+    @Column(unique = true,nullable = false,length = 70)
     private String email;
 
-    private Integer telephone;
+    @Column(unique = true)
+    private Long telephone;
 
+    @Column(nullable = false,length = 100)
     private String address;
 
-    private String date;
+    @Column(length = 10)
+    private String nascimento;
 
+    @Column(nullable = false,length = 1)
     private String sex;
 
-    private String cpf;
+    @Column(unique = true)
+    private Long cpf;
 
 
     public String getName() {
@@ -36,11 +47,11 @@ public class CadastroDto {
         this.email = email;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 
@@ -52,12 +63,13 @@ public class CadastroDto {
         this.address = address;
     }
 
-    public String getDate() {
-        return date;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    public String getNascimento() {
+        return nascimento;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
     }
 
     public String getSex() {
@@ -68,11 +80,11 @@ public class CadastroDto {
         this.sex = sex;
     }
 
-    public String getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 }

@@ -55,7 +55,7 @@ Funcionalidades que esse projeto realiza:
   - [x] Delete By Cpf
 
 ## Build e release e monitoramento
-> Aqui você coloca o link da suas pipelines
+https://github.com/erikXavier122/spring-boot-api-cadastro
 
 ## Tecnologias
 
